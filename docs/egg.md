@@ -4,7 +4,7 @@
 
 > `windows` `node`
 
-直接使用脚手架,快速搭建123
+直接使用脚手架,快速搭建
 
 `$` mkdir egg-example && cd egg-example
 
