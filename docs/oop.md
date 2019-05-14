@@ -1,6 +1,9 @@
 # php 面向对象
 
 ### 类的定义、属性、方法、实例化
+
+!> 童子军军规----让营地比你来时更干净！
+
 需要掌握的知识点
 
 面向对象基础
@@ -49,29 +52,33 @@
     $publicVariable = $obj->functionName();
     unset($publicVariable);
 ```
+
 !> 正确的使用作用域关键字可以使代码更健壮 懂得?
+
 > public 任何地方都可以调用属性方法
 
 > private 私有的 只能在当前类使用，即使在子类中也不能使用
 
 > protected 当前类、子类中才能访问外部无权点用
 
-PHP虽是弱类型语言，并不是说PHP就没有类型概念。PHP的每个变量都有类型下表是PHP的基本检查函数
+PHP 虽是弱类型语言，并不是说 PHP 就没有类型概念。PHP 的每个变量都有类型下表是 PHP 的基本检查函数
 
-| 检查函数              | 类型           | 描述          |
-|----------------------|----------------|--------------|
-| is_bool()            | 布尔型         | true或false   |
-| is_integer()         | 整形           | 整数          |
-| is_double()          | 双精度型        | 浮点数        |
-| is_string()          | 字符串         | 字符串类型     |
-| is_object()          | 对象           | 对象类型      |
-| is_array()           | 数组           | 数组类型      |
-| is_resource()        | 资源           | 资源类型       |
-| is_null()            | null           | null          |
+| 检查函数      | 类型     | 描述          |
+| ------------- | -------- | ------------- |
+| is_bool()     | 布尔型   | true 或 false |
+| is_integer()  | 整形     | 整数          |
+| is_double()   | 双精度型 | 浮点数        |
+| is_string()   | 字符串   | 字符串类型    |
+| is_object()   | 对象     | 对象类型      |
+| is_array()    | 数组     | 数组类型      |
+| is_resource() | 资源     | 资源类型      |
+| is_null()     | null     | null          |
 
 ### 类的继承
+
 继承是从一个基类生成或者派生出多个类的机制
->继承自另一个类的类叫做另一个类的子类，常叫做子类、父类（超类）
+
+> 继承自另一个类的类叫做另一个类的子类，常叫做子类、父类（超类）
 
 !> 被 final 定义的类不能有子类。final 定义的方法不能被覆写
 
@@ -113,6 +120,7 @@ $obj = new CdProduct('这是商品名10块能买吗', 10);
 echo $obj->getPrice(); //10
 echo $obj->getTitle();//这是商品名10块能买吗
 ```
+
 ### 进阶 静态属性方法、常量
 
 ```php
@@ -137,7 +145,9 @@ class StaticExample
 ```
 
 ### 抽象类(abstract)
+
 抽象类不能直接被实例化，只定义了（部分实现）子类的需要的方法和属性
+
 ```php
 abstract class Product
 {
@@ -151,8 +161,10 @@ abstract class Product
     //抽象类的子类必须实现抽象类的抽象方法或者把他们声明为抽象方法
 }
 ```
+
 ### 接口(interface)
->关键字interface(声明接口类)、implements(实现接口类,如果有extends，extends应在implements之前)
+
+> 关键字 interface(声明接口类)、implements(实现接口类,如果有 extends，extends 应在 implements 之前)
 
 ```php
 interface Chargeble
@@ -168,22 +180,27 @@ class ShopProduct implements Chargeble
     }
 }
 ```
+
 ### 异常处理（TODO）
 
 ### 拦截器
+
 其实就是类的一些魔术方法，在适合的条件下被调用
 
-> __get() __set() __isset() __unset() __claa()
+> **get() **set() **isset() **unset() \_\_claa()
 
 [详情请点击](https://php.net/manual/zh/language.oop5.magic.php)
 
 ## 对象工具
-> PHP 和包 PHP包和命名空间
 
-命名空间 声明关键字namespace 引用关键字 use（可以用关键字 as 起别名） `命名要规范 要规范 要规范 ` 重要的事儿说三遍
+> PHP 和包 PHP 包和命名空间
+
+命名空间 声明关键字 namespace 引用关键字 use（可以用关键字 as 起别名） `命名要规范 要规范 要规范` 重要的事儿说三遍
+
 ```text
 在这里先了解一下 include_once 与 require_once 的区别 ,require()调用文件出错时会停止整个程序，而include()出错会生成警告，跳出引用代码然后继续执行 自动加载一般使用require这样的加载文件
 ```
+
 ```php
 public function __autoload($className){
     if( preg_math('/\\\\/', $className)){
@@ -195,14 +212,15 @@ public function __autoload($className){
     //spl_autoload_register() 可以看看
 }
 ```
-| 相关方法、操作符          | 类型           |
-|-------------------------|----------------|
-| class_exists()          | 类存在否        |
-| instanceof              | 是否属于        |
-| method_exists()         | 方法是否存在    |
-| get_class_vars()        | 获取属性返回数组 |
-| get_parent_class()      | 是否存在父类    |
+
+| 相关方法、操作符   | 类型             |
+| ------------------ | ---------------- |
+| class_exists()     | 类存在否         |
+| instanceof         | 是否属于         |
+| method_exists()    | 方法是否存在     |
+| get_class_vars()   | 获取属性返回数组 |
+| get_parent_class() | 是否存在父类     |
 
 > 方法调用 call_user_function()
-调用函数时   参数一 方法名（字符串）
-调用类方法时  参数位数组 数组的第一个元素参数是对象，剩下的是对象的方法名 
+> 调用函数时 参数一 方法名（字符串）
+> 调用类方法时 参数位数组 数组的第一个元素参数是对象，剩下的是对象的方法名
