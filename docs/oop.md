@@ -224,3 +224,52 @@ public function __autoload($className){
 > 方法调用 call_user_function()
 > 调用函数时 参数一 方法名（字符串）
 > 调用类方法时 参数位数组 数组的第一个元素参数是对象，剩下的是对象的方法名
+
+## 常见设计模式
+
+### 观察者模式
+
+```php
+    //主题接口
+    interface Theme
+    {
+        public function register(Observer $observer);
+        public function notify();
+    }
+
+    //观察者接口
+    interface Observer
+    {
+        public function watch();
+    }
+
+    //主题
+    class Action implements Theme
+    {
+        public $_observer = [];
+        public function register(Observer $observer)
+        {
+            $this->_observer[] = $observer;
+        }
+        public function notify()
+        {
+            foreach ($this->_observer as $observer) {
+                $observer->watch();
+            }
+        }
+    }
+
+    //观察者
+    class People implements Observer
+    {
+        public function watch()
+        {
+            echo " this is people <br/>";
+        }
+    }
+    //实例化
+    $obj = new Action();
+    $obj->register(new People());
+    $obj->notify();
+
+```
