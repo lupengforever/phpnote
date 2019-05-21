@@ -273,3 +273,102 @@ public function __autoload($className){
     $obj->notify();
 
 ```
+
+### 适配器模式
+
+```php
+    interface MediaPlayer
+    {
+        public function play($audioType, $fileName);
+    }
+
+    interface AdvancedMediaPlayer
+    {
+        public function playVlc($fileName);
+        public function playMp4($fileName);
+    }
+
+    class MediaAdapter implements MediaPlayer
+    {
+        private $media;
+
+        public function __construct($audioType)
+        {
+            switch ($audioType) {
+                case 'vlc':
+                    $this->media = new VlcPlayer();
+                    break;
+                case 'mp4':
+                    $this->media = new Mp4Player();
+                    break;
+                default:
+                    var_dump("没有" . $audioType . "文件格式");
+                    echo '<br/>';
+            }
+        }
+
+        public function play($audioType, $fileName)
+        {
+            switch ($audioType) {
+                case 'vlc':
+                    $this->media->playVlc($fileName);
+                    break;
+                case 'mp4':
+                    $this->media->playMp4($fileName);
+                    break;
+                default:
+                    var_dump("没有" . $audioType . "文件格式");
+                    echo '<br/>';
+            }
+        }
+    }
+
+    class Mp4Player implements AdvancedMediaPlayer
+    {
+        public function playVlc($fileName)
+        { }
+
+        public function playMp4($fileName)
+        {
+            var_dump("播放MP4格式的文件" . $fileName);
+            echo '<br/>';
+        }
+    }
+
+    class VlcPlayer implements AdvancedMediaPlayer
+    {
+        public function playVlc($fileName)
+        {
+            var_dump("播放vlc格式的文件" . $fileName);
+            echo '<br/>';
+        }
+
+        public function playMp4($fileName)
+        { }
+    }
+
+    class AudioPlayer implements MediaPlayer
+    {
+        public function play($audioType, $fileName)
+        {
+            if ($audioType == 'mp3') {
+                var_dump("播放mp3格式的文件" . $fileName);
+                echo '<br/>';
+            } elseif ($audioType == 'vlc' || $audioType == 'mp4') {
+                $media = new MediaAdapter($audioType);
+                $media->play($audioType, $fileName);
+            } else {
+                var_dump("非法格式的文件" . $fileName);
+                echo '<br/>';
+            }
+        }
+    }
+
+
+    $media = new AudioPlayer();
+
+    $media->play("mp3", "beyond the horizon.mp3");
+    $media->play("mp4", "alone.mp4");
+    $media->play("vlc", "far far away.vlc");
+    $media->play("avi", "mind me.avi");
+```
