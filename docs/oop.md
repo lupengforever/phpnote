@@ -406,7 +406,7 @@ public function __autoload($className){
     }
     class Price
     {
-        public $instance = null;
+        public $instance = null;//要保证唯一性
         //在这里可以对构造方法改进
         public function __construct($instance)
         {
