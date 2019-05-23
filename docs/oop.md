@@ -372,3 +372,55 @@ public function __autoload($className){
     $media->play("vlc", "far far away.vlc");
     $media->play("avi", "mind me.avi");
 ```
+
+### 策略模式
+
+```php
+    interface Strategy
+    {
+        public function calPrice($price);
+    }
+    class LowStrategy implements Strategy
+    {
+        private $Ratio = 0.99;
+        public function calPrice($price)
+        {
+            return $price * $this->Ratio;
+        }
+    }
+    class MiddStrategy implements Strategy
+    {
+        private $Ratio = 0.95;
+        public function calPrice($price)
+        {
+            return $price * $this->Ratio;
+        }
+    }
+    class HighStrategy implements Strategy
+    {
+        private $Ratio = 0.90;
+        public function calPrice($price)
+        {
+            return $price * $this->Ratio;
+        }
+    }
+    class Price
+    {
+        public $instance = null;
+        //在这里可以对构造方法改进
+        public function __construct($instance)
+        {
+            $this->instance = $instance;
+        }
+
+        public function getPrice($price)
+        {
+            $price = $this->instance->calPrice($price);
+            unset($this->instance);
+            return $price;
+        }
+    }
+    $lowStrategyObj = new LowStrategy();
+    $lowPrice = (new Price($lowStrategyObj))->getPrice(1000);
+    echo $lowPrice;
+```
