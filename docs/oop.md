@@ -225,6 +225,33 @@ public function __autoload($className){
 > 调用函数时 参数一 方法名（字符串）
 > 调用类方法时 参数位数组 数组的第一个元素参数是对象，剩下的是对象的方法名
 
+!> 哈哈哈 上面的是不是太老了看下面
+
+```php
+    function classLoader($class)
+    {
+        $path = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+        $file = __DIR__ . '/src/' . $path . '.php';
+        if (file_exists($file)) {
+            require_once $file;
+        }
+    }
+    spl_autoload_register('classLoader');
+```
+
+其实`spl_autoload_register`有三个参数
+第一个参数：
+
+可以传方法名字符串(string)，也可以是数组调用的是类里面方法(array)
+
+第二个参数：
+
+throw 当无法正常加载时 `是否` 抛出异常 默认 true
+
+第三个参数
+
+prepend `是否` 会添加函数到队列之首 不然加到队尾 默认 false
+
 ## 常见设计模式
 
 ## 单例模式
