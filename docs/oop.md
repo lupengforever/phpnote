@@ -227,6 +227,37 @@ public function __autoload($className){
 
 ## 常见设计模式
 
+## 单例模式
+
+```php
+class Database
+{
+    // 先定义一个静态的私有属性
+    private static $instance;
+
+    // 定义私有的构造方法
+    private function __construct()
+    {
+        // Do nothing.
+    }
+    // 定义私有的克隆方法 防止clone
+    private function __clone()
+    {
+        // Do nothing.
+    }
+    // 定义一个私有的静态 的方法  用于获取此类的实例
+    public static function getInstance()
+    {
+        if (!(self::$instance instanceof self)) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+}
+$b = Database::getInstance();
+```
+
 ### 观察者模式
 
 ```php
