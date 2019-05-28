@@ -162,6 +162,10 @@ abstract class Product
 }
 ```
 
+    抽象类可以有成员属性
+    抽象类的抽象方法不能定义为私有的(因为抽象子类要实现抽象类的方法，定义为私有会报错)
+    抽象类可以实现接口，也可以不实现接口的方法
+
 ### 接口(interface)
 
 > 关键字 interface(声明接口类)、implements(实现接口类,如果有 extends，extends 应在 implements 之前)
