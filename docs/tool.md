@@ -13,12 +13,11 @@
     yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel
     yum install  gcc perl-ExtUtils-MakeMaker
     wget https://github.com/git/git/archive/v2.9.2.tar.gz//下载最新版
-    gittar zxf git-2.9.2.tar.gz //解压文件
+    tar zxf git-2.9.2.tar.gz //解压文件
     cd git-2.9.2//进入文件目录
-    make prefix=/usr/local/git all
-    make prefix=/usr/local/git install
-    echo "export PATH=$PATH:/usr/local/git/bin" >> /etc/bashrc
-    source /etc/bashrc
+    ./configure --prefix=/usr/local
+    make && make install
+    ln -s 当前目录/git /usr/bin
     git --version//查看版本
 ```
 
