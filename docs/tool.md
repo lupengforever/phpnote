@@ -36,4 +36,7 @@
     cat ~/.ssh/id_rsa.pub//可以查看此文件内容并复制到github
     ssh -T git@github.com
     // 然后就可以尽情使用git了 就是如此简单
+    // 当在linux下clone项目后 之后git操作 每次都要输入账号密码，会让你觉得有一点点烦，不必惊慌请在项目下执行下面命令
+    git config --global credential.helper store
+    // 然后在执行一次操作以后就不用再次输入账号密码
 ```
